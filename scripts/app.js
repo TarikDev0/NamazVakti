@@ -86,13 +86,18 @@ if ("Notification" in window && Notification.permission !== "granted") {
 
 if ("geolocation" in navigator) {
   navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      fetchPrayerTimes(pos.coords.latitude, pos.coords.longitude);
-    },
-    () => {
-      document.getElementById("error").classList.remove("hidden");
-    }
-  );
+  (pos) => {
+    fetchPrayerTimes(pos.coords.latitude, pos.coords.longitude);
+  },
+  () => {
+    document.getElementById("error").classList.remove("hidden");
+  },
+  {
+    enableHighAccuracy: false,
+    timeout: 5000,
+    maximumAge: 10000,
+  }
+);
 } else {
   document.getElementById("error").classList.remove("hidden");
 }
