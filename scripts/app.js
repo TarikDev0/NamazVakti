@@ -104,32 +104,29 @@ if ('serviceWorker' in navigator) {
       .catch(() => console.log('Service Worker kaydı başarısız'));
   });
 }
-document.addEventListener('DOMContentLoaded', () => {
-  const installBtn = document.getElementById('install-btn');
-  let deferredPrompt;
+let deferredPrompt;
+const installBtn = document.getElementById('install-btn');
 
-  // PWA yükleme hazırsa tetiklenir
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installBtn.style.display = 'flex'; // Butonu göster
-  });
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault(); // Tarayıcı otomatik popup'u engelle
+  deferredPrompt = e;
+  installBtn.style.display = 'flex'; // Butonu göster
+});
 
-  installBtn.addEventListener('click', async () => {
-    if (!deferredPrompt) {
-      alert('Uygulamayı ana ekrana ekleme bildirimi şu anda kullanılamıyor. Lütfen tarayıcının menüsünden "Ana Ekrana Ekle" seçeneğini kullanın.');
-      return;
-    }
-    deferredPrompt.prompt();
-    const choiceResult = await deferredPrompt.userChoice;
-    if (choiceResult.outcome === 'accepted') {
-      console.log('Kullanıcı uygulamayı ana ekrana eklemeyi kabul etti.');
-      installBtn.style.display = 'none';
-    } else {
-      console.log('Kullanıcı uygulamayı ana ekrana eklemeyi reddetti.');
-    }
-    deferredPrompt = null;
-  });
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) {
+    alert('PWA kurulumu desteklenmiyor veya zaten kurulu olabilir.');
+    return;
+  }
+  deferredPrompt.prompt(); // Kurulum popup'u göster
+  const choiceResult = await deferredPrompt.userChoice;
+  if (choiceResult.outcome === 'accepted') {
+    console.log('Kullanıcı kurulumu kabul etti.');
+  } else {
+    console.log('Kullanıcı kurulumu reddetti.');
+  }
+  deferredPrompt = null;
+  installBtn.style.display = 'none'; // Butonu gizle
 });
 
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Namaz Vakitleri + Alarm</title>
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#6366f1" />
+<meta name="theme-color" content="#6366f1" />
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -21,30 +21,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet" />
 
   <style>
-    html, body {
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-      overflow-y: hidden; /* Dikey scroll kapalı */
+    body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #e0e7ff;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 1rem;
     }
     main {
-      height: 100vh; /* Tam ekran yüksekliği */
-      max-width: 400px;
-      margin: 0 auto;
       background: rgba(30, 41, 59, 0.8);
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
       border-radius: 1.5rem;
-      display: flex;
-      flex-direction: column;
+      max-width: 400px;
+      width: 100%;
+      padding: 2rem;
+      color: #e0e7ff;
       user-select: none;
     }
     header {
       text-align: center;
-      padding: 2rem 1rem 1.5rem;
-      flex-shrink: 0;
+      margin-bottom: 3rem;
     }
     header i.fa-solid {
       color: #a5b4fc;
@@ -68,20 +67,15 @@
       font-size: 1.3rem;
       color: #a5b4fc;
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       text-shadow: 0 0 4px #6366f1;
-      flex-shrink: 0;
     }
-    #prayer-times {
-      flex: 1; /* Kalan yüksekliği kapla */
+    section#prayer-times {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem; /* Kartlar arası boşluk artırıldı */
-      padding: 0 1.5rem 1.5rem;
-      overflow: hidden;
+      gap: 1.5rem;
     }
     article {
-      flex: 1; /* Kartlar eşit yükseklikte */
       background: rgba(51, 65, 85, 0.7);
       box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
       border-radius: 1.5rem;
@@ -104,7 +98,8 @@
     article h2,
     article time {
       font-weight: 600;
-      font-size: 1.75rem;
+      font-size: 1.875rem;
+      font-family: 'Poppins', sans-serif;
       color: #e0e7ff;
       text-shadow: 0 0 4px #94a3b8;
       margin: 0;
@@ -121,31 +116,6 @@
       text-align: center;
       display: none;
       user-select: none;
-    }
-    /* Install button */
-    #install-btn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      padding: 12px 24px;
-      background: linear-gradient(90deg, #a5b4fc 0%, #6366f1 100%);
-      color: white;
-      border: none;
-      border-radius: 9999px;
-      box-shadow: 0 6px 15px rgba(99, 102, 241, 0.6);
-      font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 1000;
-      user-select: none;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #install-btn:hover {
-      background: linear-gradient(90deg, #6366f1 0%, #4f46e5 100%);
-      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.7);
     }
   </style>
 </head>
@@ -211,10 +181,35 @@
     <p id="error">Konum alınamadı veya veri çekilemedi.</p>
   </main>
 
-  <button id="install-btn" title="Uygulamayı Ana Ekrana Ekle">
-    📲 Uygulamayı Ana Ekrana Ekle
-  </button>
-
   <script src="scripts/app.js"></script>
+
+<button
+  id="install-btn"
+  style="
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 12px 20px;
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    box-shadow: 0 8px 15px rgba(79, 70, 229, 0.4);
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 1000;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    display: flex; /* Burayı none değil flex yap */
+    align-items: center;
+    justify-content: center;
+  "
+  onmouseover="this.style.backgroundColor='#4338ca'"
+  onmouseout="this.style.backgroundColor='#4f46e5'"
+>
+  Uygulamayı Ana Ekrana Ekle
+</button>
+
 </body>
 </html>
