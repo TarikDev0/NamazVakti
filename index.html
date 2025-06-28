@@ -3,13 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#6366f1" />
+  <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="Namaz Vakitleri" />
 
   <title>Namaz Vakitleri + Alarm</title>
   <link rel="manifest" href="manifest.json" />
+
+  <script>
+  // Sayfa yüklendiğinde ve scroll yapıldığında meta tag'i yeniden uygula
+  function setThemeColor(color) {
+    let meta = document.querySelector("meta[name='theme-color']");
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content', color);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setThemeColor('#6366f1');
+  });
+
+  window.addEventListener('focus', () => {
+    setThemeColor('#6366f1');
+  });
+
+  window.addEventListener('scroll', () => {
+    setThemeColor('#6366f1');
+  });
+</script>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
