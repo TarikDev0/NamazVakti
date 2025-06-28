@@ -104,3 +104,24 @@ if ('serviceWorker' in navigator) {
       .catch(() => console.log('Service Worker kaydı başarısız'));
   });
 }
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('install-btn').style.display = 'block';
+});
+
+document.getElementById('install-btn').addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const choiceResult = await deferredPrompt.userChoice;
+  if (choiceResult.outcome === 'accepted') {
+    console.log('Kullanıcı yüklemeyi kabul etti.');
+  } else {
+    console.log('Kullanıcı yüklemeyi reddetti.');
+  }
+  deferredPrompt = null;
+  document.getElementById('install-btn').style.display = 'none';
+});
+
